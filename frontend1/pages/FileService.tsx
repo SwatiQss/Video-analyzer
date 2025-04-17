@@ -3,13 +3,13 @@ export default function FileService() {
     return (
         <div className={styles.main}>
             <div className={styles.innerBody}>
-                <div className={styles.innner}>
+                <div className={styles.inner}>
                     <div className={styles.top}>
                         <p>Turn audio, video and images to text </p>
 
                     </div>
                     <div className={styles.second}>
-                        <img  src="./icon.png"></img>
+                        <img className={styles.img} src="./icon.png"></img>
 
                     </div>
                     <div className={styles.third}>
