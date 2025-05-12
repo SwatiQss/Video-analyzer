@@ -39,7 +39,7 @@ export default function FileService() {
                 method:"POST",
                 body:formData,
             })
-            console.log(response)
+            console.log(response )
 
             const data:UploadResponse=await response.json();
             if(response.ok){
