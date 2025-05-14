@@ -9,4 +9,4 @@ def transcribe(audio_path):
 
 if __name__ == "__main__":
     audio_file = sys.argv[1]
-    print(transcribe(audio_file))  # only print text to stdout
+    print(transcribe(audio_file))

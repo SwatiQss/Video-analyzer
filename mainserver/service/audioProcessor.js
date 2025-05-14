@@ -1,5 +1,6 @@
 //serivce to take audio file directory and form a text of that audio 
-
+const express=require('express');
+const router=express.Router();
 const { spawn } = require('child_process');
 
 function  speechtoText(audioPath) {
@@ -21,6 +22,8 @@ function  speechtoText(audioPath) {
         pythonProcess.on('close', (code) => {
             if (code === 0) {
                 resolve(output.trim());
+                //data=output
+                
             } else {
                 reject(new Error(`Python process exited with code ${code}: ${errorOutput}`));
             }
