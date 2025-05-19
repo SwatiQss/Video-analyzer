@@ -2,19 +2,12 @@ const http=require('http');
 const express=require('express');
 const cors=require('cors');
 const app=express();
-
-//middleware
-
 app.use(express.json());
 app.use(cors());
 
 const uploadRoutes=require('./routes/uploadRoutes');
 const summarizeRoutes=require('./routes/summarizeRoutes');
 const questionRoutes=require('./routes/questionRoutes');
-//const userRoutes=require('./routes/userRoutes');
-//middlware for routing
-
-//app.use('/',userRoutes);
 app.use('/upload',uploadRoutes);
 app.use('/',summarizeRoutes);
 app.use('/question',questionRoutes);

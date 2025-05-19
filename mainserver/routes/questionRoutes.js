@@ -2,10 +2,10 @@
 const express = require('express');
 const { spawn } = require('child_process');
 const router=express.Router();
-const app = express();
 
 
-app.post('/generate', (req, res) => {
+
+router.post('/generate', (req, res) => {
   const {text} = req.body;
 
   const python = spawn('python', ['question.py'], {
