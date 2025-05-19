@@ -18,6 +18,7 @@ export default function FileService() {
 
     const [selectedFile,setSelectedFile]=useState<File |null>(null);
     const [uploadStatus,setUploadStatus]=useState<string>("");
+    const [questions, setQuestions] = useState<string[]>([]);
       const [uploadTranscript,setUploadTranscript]=useState<string>("");
   const [summary,setSummary]=useState<string>("");
     const handleFileChange=(event:React.ChangeEvent<HTMLInputElement>)=>{
@@ -100,11 +101,13 @@ const handleGenrate = async () => {
     const response = await fetch("http://localhost:5000/summarize", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+          'Content-Type': 'application/json',
+           'Accept': 'application/json'
       },
       body: JSON.stringify({ text: uploadTranscript }),
+    
     });
-
+  console.log("clicked")
    if (!response.ok) {
   const errText = await response.text();
   throw new Error(`HTTP error! status: ${response.status}, details: ${errText}`);
@@ -112,8 +115,9 @@ const handleGenrate = async () => {
 
 
     const data = await response.json();
+    console.log(data,"data")
     setSummary(data.summary);
-    console.log(data.summary, "summary");
+    setTimeout(()=>{console.log(data.summary, "summary")},3000)
   } catch (err) {
     console.error("Fetch error:", err);
     alert("Summarization failed: " + err);
@@ -121,6 +125,24 @@ const handleGenrate = async () => {
 };
 
 
+const handleQuestion=async()=>{
+    try{
+        const response=await fetch("http://localhost:5000/question/generate",{
+            method:"POST",
+           headers: {
+          'Content-Type': 'application/json',
+           'Accept': 'application/json'
+      },
+      body: JSON.stringify({ text: uploadTranscript })
+        })
+        // setQuestions(response,);
+        console.log(response,"questions")
+    }catch(error){
+        console.error('Errror genrating',error);
+    }
+}
+
+   
     return (
         <div className={styles.main}>
              {uploadTranscript && uploadTranscript.length? (<div className={styles.trans}> <h3 className={styles.result}>Here is your Result</h3></div>):null}
@@ -168,7 +190,7 @@ const handleGenrate = async () => {
      {uploadTranscript && uploadTranscript.length? (<div className={styles.trans}> 
         <button onClick={downloadPDF}>Download PDF</button>
         <button onClick={handleGenrate}>Genrate KeyPoints</button>
-        <button>Genrate Quiz   </button>
+        <button onClick={handleQuestion}>Genrate Quiz   </button>
      </div>):null}
 
 
