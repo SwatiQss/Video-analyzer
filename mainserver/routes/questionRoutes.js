@@ -27,7 +27,7 @@ router.post('/generate', (req, res) => {
   python.on('close', (code) => {
     try {
       const response = JSON.parse(result);
-      console.log(response,"question response")
+      //console.log(response,"question response")
       res.json({result:response});
 
     } catch (err) {
